@@ -30,6 +30,11 @@
 			<0xdd08ff01 4 0x20000>;
 };
 
+
+/* Reserve for persistent memory - kernel hard boot */
+/* It's at end of first RAM bank */
+/memreserve/ 0x08300000 0x100000;
+
 &soc {
 
 	earjack {
