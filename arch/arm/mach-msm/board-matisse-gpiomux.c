@@ -77,7 +77,13 @@ static struct msm_gpiomux_config msm_hsic_configs[] = {
 		.gpio = gpio_num, \
 		.settings ={[GPIOMUX_SUSPENDED] = &nc_cfg,}\
 }
-
+#define MAKE_NC_CONFIG_INIT_SLEEP(gpio_num) { \
+		.gpio = gpio_num, \
+		.settings ={\
+			[GPIOMUX_ACTIVE] = &nc_cfg,\
+			[GPIOMUX_SUSPENDED] = &nc_cfg,\
+		}\
+}
 
 static struct gpiomux_setting nc_cfg = {
         .func = GPIOMUX_FUNC_GPIO,
@@ -87,7 +93,7 @@ static struct gpiomux_setting nc_cfg = {
 };
 #endif
 
-#if defined(CONFIG_MACH_MATISSEWIFI_OPEN) || defined(CONFIG_MACH_MATISSELTE_OPEN) || defined(CONFIG_MACH_MATISSELTE_VZW) || defined(CONFIG_MACH_MATISSELTE_USC) || defined(CONFIG_MACH_MATISSE3G_OPEN)
+#if defined(CONFIG_MACH_MATISSEWIFI_OPEN) || defined(CONFIG_MACH_MATISSELTE_OPEN)
 #define MAKE_NC_CONFIG_INIT_SLEEP(gpio_num) { \
 		.gpio = gpio_num, \
 		.settings ={ \
@@ -119,9 +125,10 @@ static struct msm_gpiomux_config matissewifi_open_nc_gpio_cfgs[] __initdata = {
 	MAKE_NC_CONFIG_INIT_SLEEP(116),
 };
 #endif
+
 #if defined(CONFIG_MACH_MATISSELTE_OPEN)
 static struct msm_gpiomux_config matisselte_open_nc_gpio_cfgs[] __initdata = {
-//	MAKE_NC_CONFIG_INIT_SLEEP(4),
+	MAKE_NC_CONFIG_INIT_SLEEP(4),
 };
 #endif
 
